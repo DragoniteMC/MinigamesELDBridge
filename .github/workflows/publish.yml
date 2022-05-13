@@ -37,6 +37,10 @@ jobs:
           distribution: 'adopt'
       - uses: whelk-io/maven-settings-xml-action@v4
         with:
-          servers: '[{ "id": "nexus-dnmc", "username": "${{ secrets.NEXUS_USER }}", "password": "${{ secrets.NEXUS_PASSWORD }}" }]'
+          active_profiles: '[ "github" ]'
+          servers: '[
+            {  "id": "github", "username": "eric2788", "password": "${{ secrets.GITHUB_TOKEN }}" },
+            { "id": "nexus-dnmc", "username": "${{ secrets.NEXUS_USER }}", "password": "${{ secrets.NEXUS_PASSWORD }}" }
+          ]'
       - name: Publish package
         run: mvn --batch-mode deploy

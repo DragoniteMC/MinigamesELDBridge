@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.eldependenci</groupId>
-    <artifactId>Template-For-ELDependenci-Addon</artifactId>
+    <groupId>com.dragonite.mc</groupId>
+    <artifactId>minigames-eld-bridge</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.1</version>
+    <version>0.0.1</version>
     <modules>
-        <module>APIModule</module>
-        <module>PluginModule</module>
+        <module>minigames-eld-api</module>
+        <module>minigames-eld-bridge-plugin</module>
     </modules>
 
     <repositories>
@@ -22,12 +22,27 @@
             <id>github</id>
             <url>https://maven.pkg.github.com/ELDependenci/eldependenci</url>
         </repository>
+        <repository>
+            <id>nexus-dnmc</id>
+            <url>https://nexus.pulogo.xyz/repository/dnmc/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dragonite.mc</groupId>
+            <artifactId>core-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dragonite.mc</groupId>
+            <artifactId>minigame-api</artifactId>
         </dependency>
     </dependencies>
 
@@ -49,6 +64,18 @@
                 <groupId>org.eldependenci</groupId>
                 <artifactId>eldependenci-addon</artifactId>
                 <version>0.1.5</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.dragonite.mc</groupId>
+                <artifactId>core-api</artifactId>
+                <version>7.6.6</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.dragonite.mc</groupId>
+                <artifactId>minigame-api</artifactId>
+                <version>0.1.15</version>
                 <scope>provided</scope>
             </dependency>
         </dependencies>
@@ -102,14 +129,14 @@
                         <isOffline>false</isOffline>
                         <linksource>true</linksource>
                         <encoding>UTF-8</encoding>
-                        <windowtitle>ELDependenci-Addon</windowtitle>
-                        <doctitle>ELDependenci-Addon v${project.version}</doctitle>
+                        <windowtitle>MinigamesELDBridge</windowtitle>
+                        <doctitle>MinigamesELDBridge v${project.version}</doctitle>
                         <verbose>true</verbose>
                         <author>true</author>
                         <version>true</version>
                         <linksource>true</linksource>
                         <notimestamp>true</notimestamp>
-                        <bottom><![CDATA[<b>© ELDependenci - 2020</b>]]></bottom>
+                        <bottom><![CDATA[<b>© MinigamesELDBridge - 2022</b>]]></bottom>
                         <reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
                         <outputDirectory>../javadocs</outputDirectory>
                         <detectJavaApiLink>true</detectJavaApiLink>
@@ -138,6 +165,25 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.5.1</version>
+                    <executions>
+                        <execution>
+                            <id>default-deploy</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <serverId>nexus</serverId>
+                        <nexusUrl>https://nexus.pulogo.xyz/</nexusUrl>
+                        <skipStaging>true</skipStaging>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -150,14 +196,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
+            <!-- plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+            </plugin -->
         </plugins>
     </build>
 
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>Github ELDependenci Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/ELDependenci/template-for-eldependenci-addon</url>
+            <id>nexus-dnmc</id>
+            <name>DragoniteMC Nexus</name>
+            <url>https://nexus.pulogo.xyz/repository/dnmc/</url>
             <uniqueVersion>false</uniqueVersion>
         </repository>
     </distributionManagement>

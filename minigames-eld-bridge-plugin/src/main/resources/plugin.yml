@@ -1,0 +1,5 @@
+name: MinigamesELDBridge
+main: org.dragonitemc.minigames.bridge.MinigamesBridge
+version: ${project.version}
+depend: [ELDependenci, DragoniteMC-Core]
+api-version: "1.18"

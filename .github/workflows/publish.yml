@@ -39,5 +39,4 @@ jobs:
         with:
           servers: '[{ "id": "nexus-dnmc", "username": "${{ secrets.NEXUS_USER }}", "password": "${{ secrets.NEXUS_PASSWORD }}" }]'
       - name: Publish package
-        if: steps.version.outputs.length == 3
         run: mvn --batch-mode deploy

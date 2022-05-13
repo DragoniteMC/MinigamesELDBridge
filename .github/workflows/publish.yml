@@ -18,15 +18,14 @@ jobs:
           java-version: '18'
           distribution: 'adopt'
       - run: mvn --batch-mode package
-      - uses: eric2788/push-javadoc-branch@main
-        with:
-          use-maven: true
-          javadocs: javadocs
       - uses: actions/upload-artifact@v1
         with:
           name: minigames-eld-bridge-plugin
           path: ./minigames-eld-bridge-plugin/target/
-
+      - uses: eric2788/push-javadoc-branch@main
+        with:
+          use-maven: true
+          javadocs: javadocs
   upload_nexus_pkg:
     runs-on: ubuntu-latest
     needs: [ build ]

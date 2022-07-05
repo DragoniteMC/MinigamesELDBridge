@@ -1,21 +1,26 @@
 package org.dragonitemc.minigames.bridge;
 
-import com.ericlam.mc.eld.AddonManager;
-import com.ericlam.mc.eld.ELDBukkitAddon;
-import com.ericlam.mc.eld.ManagerProvider;
-import com.ericlam.mc.eld.ServiceCollection;
+import com.ericlam.mc.eld.*;
 
-public final class MinigamesBridge extends ELDBukkitAddon {
-
-    @Override
-    protected void bindServices(ServiceCollection serviceCollection) {
-    }
+@ELDBukkit(
+        lifeCycle = MinigamesBridgeLifeCycle.class,
+        registry = MinigamesBridgeRegistry.class
+)
+public final class MinigamesBridge extends ELDBukkitPlugin {
 
     @Override
-    protected void preAddonInstall(ManagerProvider provider, AddonManager installer) {
+    public void bindServices(ServiceCollection serviceCollection) {
         ELDMinigameInstallation installation = new ELDMinigameInstallation();
+        AddonInstallation installer = serviceCollection.getInstallation(AddonInstallation.class);
+
         installer.customInstallation(MinigameInstallation.class, installation);
         MinigamesModule module = new MinigamesModule(installation);
         installer.installModule(module);
+    }
+
+
+    @Override
+    protected void manageProvider(BukkitManagerProvider bukkitManagerProvider) {
+
     }
 }

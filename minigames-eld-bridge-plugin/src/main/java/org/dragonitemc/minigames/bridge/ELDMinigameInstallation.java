@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Consumer;
 
-public final class ELDMinigameInstallation implements MinigameInstallation{
+public final class ELDMinigameInstallation implements MinigameInstallation {
 
     private final Queue<LaterRegistration> registrations = new LinkedList<>();
 

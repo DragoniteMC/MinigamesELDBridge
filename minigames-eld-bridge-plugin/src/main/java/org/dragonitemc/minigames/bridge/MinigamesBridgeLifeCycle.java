@@ -1,6 +1,6 @@
 package org.dragonitemc.minigames.bridge;
 
-import com.ericlam.mc.eld.ELDLifeCycle;
+import com.ericlam.mc.eld.bukkit.ELDLifeCycle;
 import com.ericlam.mc.minigames.core.main.MinigamesCore;
 import com.ericlam.mc.minigames.core.registable.Registration;
 import com.google.inject.Injector;
